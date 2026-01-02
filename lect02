@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    char c= 'a'+1;
+    cout << c <<endl;
+    int p = 'a'+1;
+    cout << p;
+
+    int a=10;
+    int b=20;
+    cout << a+b << endl;
+    cout << b-a << endl;
+    cout << b*a << endl;
+    cout << b/a << endl;
+    cout << b%a << endl; 
+
+    // left shift
+    a= a<<3;
+    cout << a << endl; //a= a*2^3
+    // right shift
+    a= a>>3;// a= a/2^3
+    cout << a << endl;
+
+} 
+// Code I did in second lecture of DSA in cpp
