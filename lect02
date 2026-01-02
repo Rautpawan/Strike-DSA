@@ -22,5 +22,47 @@ int main(){
     a= a>>3;// a= a/2^3
     cout << a << endl;
 
-} 
+    // to find the give number is even or odd
+    int n;
+    cout << "Enter a number:";
+    cin >> n;
+    if(n % 2 == 0) {
+        cout << n << "is even" << endl;
+    } else {
+        cout << n << "is odd" << endl;
+    }
+
+    // to find the maximum number 
+    int a, b;
+    cout << "Enter number a:";
+    cin >> a;
+    cout << "Enter number b: ";
+    cin >> b;
+    if(a > b) {
+        cout << a << " is maximum";
+    } else {
+        cout << b << " is maximum";
+    }
+
+    // Grade Calculator on marks
+     int marks;
+    cout << "Enter your marks: ";
+    cin >> marks;
+    if(marks > 100 || marks < 0) {
+        cout << "Invalid marks" << endl;
+    } else if(marks >= 90) {
+        cout << "Grade: A " << endl;
+    } else if(marks >= 80) {
+        cout << "Grade: B " << endl;;
+    } else if(marks >= 70) {
+        cout << "Grade: C " << endl;
+    } else if(marks >= 60) {
+        cout << "Grade: D " << endl;
+    } else {
+        cout << "Grade: F-Fail" << endl;
+    }
+
+
+    return 0;
+}
 // Code I did in second lecture of DSA in cpp
