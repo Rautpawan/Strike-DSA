@@ -1,0 +1,83 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+
+    // Binary Triangle
+    // int n;
+    // cout << "enter the number:";
+    // cin >> n;
+    // for(int i=1; i<=n; i++){
+    //     bool num = i % 2;
+    //     for(int j=0; j<i; j++){
+    //         cout << num;
+    //         num = !num;
+    //     }
+    //     cout << endl;
+    // }
+
+    // for(char c='A'; c<='E'; c++){
+    //     for(char d='A'; d<=c; d++){
+    //         cout << d;
+    //     }
+    //     cout << endl;
+    // }
+    // for(int i=1; i<=5; i++){
+    //     char c='A';
+    //     for(int j=0; j<i; j++){
+    //         cout << c;
+    //         c++;
+    //     }
+    //     cout << endl;
+    // }
+
+    // char c='A';
+    // for(int i=1; i<=5; i++){
+    //     for(int j=1; j<=i; j++){
+    //         cout << c;
+    //     }
+    //     c++;
+    //     cout << endl;
+    // }
+
+    // int n;
+    // cout << "Enter the number:";
+    // cin >> n;
+    // for(int i=n-1; i>=0; i--){
+    //     for(int j=i; j>=0; j--){
+    //         cout << " ";
+    //     }
+    //     for(int j=1; j<=n-i; j++){
+    //         cout << j;
+    //     }
+    //     for(int j=n-i-1; j>0; j--){
+    //         cout << j;
+    //     }
+    //     cout << endl;
+    // }
+
+    // int n;
+    // cout << "enter the number:";
+    // cin >> n;
+    // if(n<2){
+    //     cout << "Number is not prime!";
+    // }
+    // for(int i=2; i<n; i++){
+    //     if(n%i==0){
+    //         cout << "The given number is not prime!";
+    //         return 0;
+    //     }
+    // }
+    // cout << "The given number is prime!";
+
+    int num=23456;
+    int sum=0;
+    while(num){
+        int rem=num%10;
+        sum+=rem;
+        num/=10;
+    }
+    cout << sum;
+
+    return 0;
+}
