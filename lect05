@@ -1,0 +1,80 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+    // // reverse a number 
+    // int num=45321;
+    // int ans=0;
+    // while(num){
+    //     int lastDigit=num%10;
+    //     num= num/10;
+    //     ans=ans * 10 + lastDigit;
+    // }
+    // cout << ans << endl;
+
+
+    // // Decimal -> Binary
+    // int number=23;
+    // int ans=0, mul=1;
+    // while(number){
+    //     int rem = number%2;
+    //     number= number / 2;
+    //     ans= ans+rem*mul;
+    //     mul=mul*10;
+    // }  
+    // cout << ans << endl;
+
+    // // Binary -> Decimal
+    // int num=1101  , ans =0, mul=1;
+    // while(num){
+    //     int rem=num%10;
+    //     num=num/10;
+    //     ans= ans+rem*mul;
+    //     mul*=2;
+    // }
+    // cout << ans << endl;
+
+    // // Factorial
+    // int fact=1;
+    // int n;
+    // cout<< "Enter the number";
+    // cin >> n;
+    // for(int i=1; i<=n; i++){
+    //     fact= fact*i;
+    // }
+    // cout << fact << endl;
+
+    // // fibonacci 
+    // int n=5;
+    // if(n<=1){
+    //     cout << n;
+    // }
+    // int first=0;
+    // int second=1;
+    // for(int i=2; i<=n; i++){
+    //     int curr=first+second;
+    //     first=second;
+    //     second=curr;
+    // }
+    // cout << second;
+
+    //Armstrong
+    
+
+
+    // // Sqare root of number
+    // int n;
+    // cout << "Enter the number:";
+    // cin >> n;
+    // int ans=1;
+    // if(n==0){
+    //     cout << 0 << endl;
+    //     return 0;
+    // }
+    // for(int i=1; i*i<=n; i++){
+    //     ans=i;
+    // }
+    // cout << ans << endl;
+
+    return 0;
+}
