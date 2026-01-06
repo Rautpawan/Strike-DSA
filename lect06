@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+
+// // function for factorial
+// void factorial(int n){
+//     int fact=1;
+//     for(int i=1; i<=n; i++){
+//         fact=fact*i;
+//     }
+//     cout << fact << endl;
+// }
+// int main(){
+// int num=7;
+// factorial(num);
+// factorial(5);
+// }
+
+
+// //Find Grade
+// void findGrade(int marks){
+//     if(marks>90){
+//         cout << "Grade: A+"<< endl;
+//     }
+//     else if(marks>80){
+//         cout << "Grade: A" << endl;
+//     }
+//     else if (marks>70){
+//         cout << "Grade: B+" << endl;
+//     }
+//     else{
+//         cout << "Grade: C" << endl;
+//     }
+// }
+// int main(){
+//     int marks=85;
+//     findGrade(marks);
+//     return 0;
+// }
+
+
+// // pass by value 
+// void increament(int n){
+//     n++;
+// }
+// int main(){
+//     int n=10;
+//     increament(n);
+//     cout << n << endl;
+// }
+
+
+// // pass by refference
+// void increament(int &n){
+//     n++;
+// }
+// int main(){
+//     int n=10;
+//     increament(n);
+//     cout << n << endl;
+// }
+
+
