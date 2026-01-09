@@ -1,0 +1,125 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+// Rotate Array by 1 (GFG)
+// rotate array by k times (leetcode)
+void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<int>arr(n);
+
+        for(int i=0; i<n; i++){
+            arr[(i+k)%n]=nums[i];
+        }
+        for(int i=0; i<n; i++){
+            nums[i]=arr[i];
+        }
+    }
+
+     void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        if(!k){
+            return ;
+        }
+
+
+        int i=0 , j=n-1;
+        while(i<j){
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+
+        i=0 ;
+        j=k-1;
+        while(i<j){
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+
+        i=k;
+        j=n-1;
+        while(i<j){
+            int temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+    }
+
+    // Sum of unique element in array (strike)
+    int sumOfUnique(vector<int>& nums) {
+    // Your code here
+	int n = nums.size();
+	int sum=0;
+
+	for(int i=0; i<n; i++){
+		bool found=false;
+		for(int j=0; j<n; j++){
+			if(i==j){
+				continue;
+			}
+			else if(nums[i]==nums[j]){
+				found=true;
+				break;
+			}
+		}
+		if(found==false){
+			sum+=nums[i];
+		}
+		
+	}
+	return sum;
+}
+
+int sumOfUnique(vector<int>& nums) {
+    // Your code here
+	int n = nums.size();
+	int sum=0;
+	vector<int>frec(101,0);
+
+	for(int i=0; i<n; i++){
+		frec[nums[i]]++;
+	}
+	for(int i=0; i<101; i++){
+		if(frec[i]==1){
+			sum+=i;
+		}
+	}
+	return sum;
+}
+
+// Second largest element (GFG)
+  int getSecondLargest(vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        int largest = arr[0];
+        
+        for(int i=0; i<n; i++){
+            if(arr[i]>largest){
+                largest = arr[i];
+            }
+        }
+        int second_largest = -1;
+        
+        for(int i=0; i<n; i++){
+            if(arr[i]==largest){
+                continue;
+            }
+            else if(arr[i]>second_largest){
+                second_largest = arr[i];
+            }
+        }
+        return second_largest; 
+    }
