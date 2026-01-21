@@ -1,0 +1,156 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+//Product Pair
+bool isProduct(vector<int>& arr, long long target) {
+    // Your code here
+	int n = arr.size();
+	sort(arr.begin(),arr.end());
+
+	 for (int i = 0; i < n; i++) {
+        if (arr[i] == 0) {
+            if (target == 0) return true;
+            continue;
+        }
+	if(target % arr[i]!=0) continue;
+		int start = i+1, end=n-1 , mid ;
+		long long ans= target/ arr[i];
+		
+		while(start<=end){
+			mid= start + (end-start)/2;
+			if(arr[mid]==ans){
+				return true;
+			}
+			else if (arr[mid]<ans){
+				start=mid+1;
+			}
+			else{
+				end=mid-1;
+			}
+		}
+	}
+	return false;   
+}
+
+// Product Pair
+bool isProduct(vector<int>& arr, long long target) {
+    // Your code here
+	sort(arr.begin(), arr.end());
+	int mid =-1, n=arr.size();
+	for(int i=0; i<n; i++){
+		if(arr[i]<0){
+			mid=i;
+		}
+		else{
+			break;
+		}
+	}
+		if(target>=0){
+			int start =0, end=mid;
+			while(start<end){
+				if(arr[start]*arr[end]==target){
+					return 1;
+				}
+				else if(arr[start]*arr[end]<target){
+					end--;
+				}
+				else{
+					start++;
+				}
+			}
+			start =mid+1 , end=n-1;
+			while(start<end){
+				if(arr[start]*arr[end]==target){
+					return 1;
+				}
+				else if(arr[start]*arr[end]<target){
+					start++;
+				}
+				else{
+					end--;
+				}
+			}
+		}
+
+		else{
+				int start = 0, end=mid+1;
+				while(start<=end && end<n) {
+					if(arr[start]*arr[end]==target){
+					return 1;
+				}
+				else if(arr[start]*arr[end]>target){
+					end++;
+				}
+				else{
+					start++;
+				}
+				}
+			}
+	return false;
+    
+}
+
+
+// Split Array into Two Equal Sum Subarrays
+class Solution {
+public:
+    bool canSplit(vector<int>& nums) {
+        //code here
+		int n = nums.size();
+		int totalSum =0;
+		for(int i=0; i<n; i++){
+			totalSum+=nums[i];
+		}
+		if(totalSum % 2 != 0){
+			return false;
+		}
+		int target = totalSum/2;
+		int sum =0;
+
+		for(int i=0; i<n-1; i++){
+			sum+=nums[i];
+			if(sum==target){
+				return true;
+			}
+		}
+		return false;
+    }
+};
+
+// Equal sums
+class Solution {
+  public:
+    vector<int> EqualSum(vector<int> arr) {
+        //Code here
+		int n = arr.size();
+		int sum =0;
+		for(int i=0; i<n; i++){
+			sum+=arr[i];
+		}
+		int leftSum=0 ;
+		int rightSum;
+		vector<int>answer(3);
+		answer[0]=INT_MAX;
+
+		for(int i=0; i<n-1; i++){
+			leftSum+=arr[i];
+			rightSum=sum-leftSum;
+			if(abs(leftSum-rightSum)>answer[0])
+			continue;
+
+			if(rightSum>leftSum){
+				answer[2]=1;
+				answer[0]=rightSum-leftSum;
+				answer[1]=i+2;
+			}
+			else{
+				answer[2]=2;
+				answer[0]=leftSum-rightSum;
+				answer[1]=i+2;
+			}
+			
+		}
+		return answer;
+    }
+};
