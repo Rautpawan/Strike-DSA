@@ -1,0 +1,71 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// Maximum Difference between Two Elements
+int maxDiff(vector<int> &arr) {
+    // Your code here
+	int n = arr.size();
+	vector<int>suffixMax(n);
+
+	suffixMax[n-1]=arr[n-1];
+	for(int i=n-2; i>0; i--){
+		suffixMax[i]= max(arr[i], suffixMax[i+1]);
+
+	}
+	int ans = -1;
+	for(int i=0; i<n-1; i++){
+		if(suffixMax[i+1]>arr[i]){
+			ans = max(ans, suffixMax[i+1]-arr[i]);
+		}
+	}
+	return ans;
+	}
+
+	//Kadane's Algorithm
+	int maxSubarraySum(vector<int> &arr) {
+    // Your code here
+	int n = arr.size();
+	int maxSum = INT_MIN , subSum=0;
+
+	for(int i=0; i<n; i++){
+		if(subSum<0){
+			subSum = arr[i];
+		}
+		else{
+			subSum+=arr[i];
+		}
+		maxSum = max(maxSum, subSum);
+
+	}    
+	return maxSum;
+}
+
+//Traping Rain Water
+int trapWater(vector<int>& arr) {
+    int n = arr.size();
+
+	vector<int>leftMax(n,0);
+	vector<int>rightMax(n,0);
+
+	leftMax[0]=arr[0], rightMax[n-1]=arr[n-1];
+
+	for(int i=1; i<n; i++){
+		leftMax[i]+= max(leftMax[i-1], arr[i]);
+	}
+
+	for(int i=n-2; i>0; i--){
+		rightMax[i]+= max(rightMax[i+1], arr[i]);
+	}
+
+	int totalWater = 0;
+	for(int i=1; i<n-1; i++){
+	int minLeftRight = min(leftMax[i-1], rightMax[i+1]);
+
+	if(minLeftRight > arr[i]){
+		totalWater+=minLeftRight - arr[i];	
+	}
+ }
+ return totalWater;
+
+}
