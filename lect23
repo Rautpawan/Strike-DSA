@@ -1,0 +1,68 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// // Trapping Rain Problem in single pass
+// int trapWater(vector<int>& arr) {
+//     int n = arr.size();
+// 	int leftmax=0, rightmax=0, left=0, right=n-1, totalwater=0;
+
+// 	while(left<right){
+// 		if(arr[left]<arr[right]){
+// 			if(leftmax>arr[left]){
+// 				totalwater+=leftmax-arr[left];
+// 			}
+// 			else{
+// 				leftmax=arr[left];
+// 			}
+// 			left++;
+// 		}
+// 		else{
+// 			if(rightmax>arr[right]){
+// 				totalwater+=rightmax-arr[right];
+// 			}
+// 			else{
+// 				rightmax=arr[right];
+// 			}
+// 			right--;
+// 		}
+// 	}
+// 	return totalwater;
+// }
+
+int main(){
+	// how to define 2d array
+
+	int arr[3][4]= {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+	for(int i=0; i<3; i++){
+		for(int j=0; j<4; j++){
+			cout << arr[i][j] << " ";
+		}
+		cout <<endl;
+	}
+
+	// Allocation of memory : Row major , column major
+	// Row major : [row_Index * column_size + column_index]
+	// column major: [column_index * row_size + row_index]
+
+	cout << endl;
+	// cout << arr[0][0];
+
+	// Transpose of matrix;
+	int nums[4][4] = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+	for(int i=0; i<4; i++){
+		for(int j=0; j<4; j++){
+			int temp = nums[i][j];
+			nums[i][j]=nums[j][i];
+			nums[j][i]=temp;
+		}
+	} 
+				
+	// for(int i=0; i<4; i++){
+	// 	for(int j=0; j<4; j++){
+	// 		cout << nums[i][j] << " ";
+	// 	}
+	// 	cout << endl;
+	// }
+
+}
