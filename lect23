@@ -1,68 +1,128 @@
 #include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-// // Trapping Rain Problem in single pass
-// int trapWater(vector<int>& arr) {
-//     int n = arr.size();
-// 	int leftmax=0, rightmax=0, left=0, right=n-1, totalwater=0;
+// Search in Matrix
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    int row=matrix.size(), col = matrix[0].size();
 
-// 	while(left<right){
-// 		if(arr[left]<arr[right]){
-// 			if(leftmax>arr[left]){
-// 				totalwater+=leftmax-arr[left];
-// 			}
-// 			else{
-// 				leftmax=arr[left];
-// 			}
-// 			left++;
-// 		}
-// 		else{
-// 			if(rightmax>arr[right]){
-// 				totalwater+=rightmax-arr[right];
-// 			}
-// 			else{
-// 				rightmax=arr[right];
-// 			}
-// 			right--;
-// 		}
-// 	}
-// 	return totalwater;
-// }
-
-int main(){
-	// how to define 2d array
-
-	int arr[3][4]= {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
-	for(int i=0; i<3; i++){
-		for(int j=0; j<4; j++){
-			cout << arr[i][j] << " ";
+	for(int i=0; i<row; i++){
+		for(int j=0; j<col; j++){
+			if(matrix[i][j]==target){
+			return true;
+			}
 		}
-		cout <<endl;
+	}
+	return false;
+}
+
+// Add Two Matrix
+vector<vector<int>> addTwoMatrix(vector<vector<int>>& mat1, vector<vector<int>>& mat2) {
+    int rowSize = mat1.size(), colSize = mat1[0].size();
+
+	if(mat1.size() != mat2.size() || mat1[0].size() != mat2[0].size()){
+		vector<vector<int>>ans(1, vector<int>(1));
+		ans[0][0]=-1;
+		return ans;
+	}
+	
+	vector<vector<int>>ans(rowSize, vector<int>(colSize));
+	for(int i=0; i<rowSize; i++){
+		for(int j=0; j<colSize; j++){
+			ans[i][j] = mat1[i][j]+mat2[i][j];
+		}
+	}
+	return ans;
+}
+
+//Transpose of Matrix
+vector<vector<int>> transpose(vector<vector<int>>& mat) {
+    int rowSize = mat.size(), colSize = mat[0].size();
+
+    for (int i = 0; i<rowSize-1; i++) {
+        for (int j = i + 1; j<colSize; j++) {
+            swap(mat[i][j], mat[j][i]);
+        }
+    }
+    return mat;
+
+}
+
+// 49. Spiral Matrix
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    vector<int>spiral;
+	int rowStart = 0, colStart = 0, rowEnd = matrix.size()-1, colEnd = matrix[0].size()-1;
+
+	while(rowStart<=rowEnd && colStart<=colEnd){
+	for(int j=colStart; j<=colEnd; j++){
+		spiral.push_back(matrix[rowStart][j]);
+	}
+	rowStart++;
+
+	for(int i=rowStart; i<=rowEnd; i++){
+		spiral.push_back(matrix[i][colEnd]);
+	}
+	colEnd--;
+
+	if(rowStart<=rowEnd){
+	for(int j=colEnd; j>=colStart; j--){
+		spiral.push_back(matrix[rowEnd][j]);
+	}
+	rowEnd--;
 	}
 
-	// Allocation of memory : Row major , column major
-	// Row major : [row_Index * column_size + column_index]
-	// column major: [column_index * row_size + row_index]
+	if(colStart<=colEnd){
+	for(int i=rowEnd; i>=rowStart; i--){
+		spiral.push_back(matrix[i][colStart]);
+	}
+	colStart++;
+	}
 
-	cout << endl;
-	// cout << arr[0][0];
+	}
+	 return spiral;
+}
 
-	// Transpose of matrix;
-	int nums[4][4] = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
-	for(int i=0; i<4; i++){
-		for(int j=0; j<4; j++){
-			int temp = nums[i][j];
-			nums[i][j]=nums[j][i];
-			nums[j][i]=temp;
+
+// Search in Sorted Matrix-I
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
+	int rowSize = matrix.size(), colSize = matrix[0].size();
+    int start = 0, end= rowSize * colSize-1;
+
+	while(start <= end){
+		int mid = start + (end-start)/2;
+
+		int rowIndex = mid/colSize;
+		int colIndex = mid%colSize;
+		 if(matrix[rowIndex][colIndex]==target){
+			return true;
+		 }
+		 else if(matrix[rowIndex][colIndex]<target){
+			start = mid+1;
+		 }
+		 else{
+			end = mid-1;
+		 }
+	}
+	return false;
+}
+
+// Rotate Image
+void rotate(vector<vector<int>>& matrix) {
+	int rowStart = 0, rowEnd=matrix[0].size()-1;
+
+	int rowSize = matrix.size() , colSize= matrix[0].size();
+
+	for(int i=0; i<rowSize-1; i++){
+		for(int j=i+1; j<colSize; j++){
+			swap(matrix[i][j],matrix[j][i]);
 		}
-	} 
-				
-	// for(int i=0; i<4; i++){
-	// 	for(int j=0; j<4; j++){
-	// 		cout << nums[i][j] << " ";
-	// 	}
-	// 	cout << endl;
-	// }
+	}
+ int colStart=0, colEnd=matrix[0].size()-1;
+	while(colStart<colEnd){
+		for(int i=0; i<rowSize; i++){
+			swap(matrix[i][colStart],matrix[i][colEnd]);
+		}
+		colStart++ , colEnd--;
+	}
 
 }
