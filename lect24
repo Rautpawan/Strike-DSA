@@ -1,0 +1,157 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// String 
+
+int main(){
+    // string str = "Rohit";
+    // cout << str;
+    // cout << str.size();
+    // cout << str.length();
+
+    // string s1;
+    // // cin >>s1;
+    // getline(cin, s1);
+    // cout << s1;
+
+    // different operations
+
+    string s1 = "rohit";
+    string s2 = "mohit";
+    string s3 = s1+s2;
+    cout << s3;
+
+    s3.push_back('a');
+    cout << s3;
+    s3.pop_back();
+    cout << s3;
+
+    // convert string into lower character
+    string s = "PAWAN";
+    for(int i=0; i<s.size(); i++){
+        if(s[i]>='A' && s[i]<='Z'){
+            s[i] = 'a'+(s[i]-'A');
+        }
+    }
+
+    return 0;
+}
+
+// Lower to Upper 
+string toUpper(string &str) {
+    // Your code here
+	 int n =str.size();
+	 for(int i=0; i<n; i++){
+		if(str[i]>='a' && str[i]<='z'){
+			str[i] = str[i]-32;
+		}
+	 }
+	 return str;
+}
+
+// Palindrome String
+bool isPalindrome(string& s) {
+    // Your code here
+	int start = 0, end = s.size()-1;
+	while(start<end){
+		if(s[start]!=s[end]){
+			return false;
+		}
+		start++;
+		end--;
+	}
+	return true;
+}
+
+// Defanging an IP Address
+   string defangIPaddr(string address) {
+        //Code here
+		string ans;
+		for(int i=0; i<address.size(); i++){
+			if(address[i]=='.'){
+				ans = ans+"[.]";
+			}
+			else{
+				ans.push_back(address[i]);
+			}
+		}
+		return ans;
+    }
+
+    // Reverse a String
+    string reverseString(string &s) {
+    // Your code here
+	int start = 0 , end = s.size()-1;
+
+	while(start<end){
+		char temp= s[start];
+		s[start]= s[end];
+		s[end]=temp;
+		start++;
+		end--;
+	}
+	return s;
+}
+
+    // first unique character in string
+    int firstUniqChar(string& s) {
+    int n = s.size();
+	int count[26]={0};
+
+	for(int i=0; i<n ;i++){
+		count[s[i]-'a']++;
+	}
+	for(int i=0; i<n; i++){
+		if(count[s[i]-'a']==1){
+			return i;
+		}
+
+	}
+	return -1;
+}
+
+// Sort a String 
+string sort(string s) {
+    // Code here
+	int count[26] ={0};
+	int n= s.size();
+	for(int i=0; i<n; i++){
+		count[s[i]-'a']++;
+
+	}
+	string ans;
+	for(int i=0; i<26; i++){
+		char c = 'a'+i;
+		while(count[i]){
+			ans.push_back(c);
+			count[i]--;
+		}
+	}
+	return ans;
+}
+
+// String Rotated by two places
+    bool isRotated(string& word1, string& word2) {
+        // code here
+		bool clockwise = true;
+		int n = word1.size();
+		for(int i=0; i<n; i++){
+			if(word1[i]!= word2[(i+2)%n]){
+				clockwise = false;
+				break;
+			}
+		}
+		if(clockwise){
+			return true;
+		}
+		bool anticlock = true;
+
+			for(int i=0; i<n; i++){
+			if(word2[i]!= word1[(i+2)%n]){
+				anticlock = false;
+				break;
+			}
+		}
+		return anticlock;
+		
+    }
