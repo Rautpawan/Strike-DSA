@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Longest Substring Without Repeating Characters
+int maxUniqueSubstring(string& s) {
+       //code here
+	   int start=0, end=0, n=s.size();
+	   bool freq[256]={0};
+	   int answer=0;
+
+	   while(end<n){
+		while(freq[s[end]]){
+			freq[s[start]]=0;
+			start++;
+		}
+		freq[s[end]]=1;
+		end++;
+		answer = max(answer, end-start);
+	   }
+	   return answer;
+}
+
+//  Smallest Distinct Window
+int findSubString(string str) {
+    // Your code here
+	int n = str.size();
+	int unique =0;
+	bool freq[256]={0};
+
+	for(int i=0; i<n; i++){
+		if(freq[str[i]]==0){
+			freq[str[i]]=1;
+			unique++;
+		}
+	}
+	int start=0, end=0, ans=str.size(), currunique=0;
+	int count[256]={0};
+
+	while(end<n){
+		count[str[end]]++;
+
+		if(count[str[end]]==1){
+			currunique++;
+		}
+		while(currunique==unique){
+			ans = min(ans, end-start+1);
+			count[str[start]]--;
+			if(count[str[start]]==0){
+				currunique--;
+			}
+			start++;
+		}
+		end++;
+	}
+	return ans;
+}
+
+// Roman to Integer
+class Solution {
+public:
+
+bool isNext(char first , char next){
+	string roman = "IVXLCDM";
+	if(first==next){
+		return false;
+	}
+	for(int i=0; i<7; i++){
+		if(first==roman[i]){
+			return true;
+		}
+		else if(next==roman[i]){
+			return false;
+		}
+	}
+}
+
+int findValue(char c){
+	string roman = "IVXLCDM";
+	int numbers[]={1,5,10,50,100,500,1000};
+	for(int i=0; i<7; i++){
+		if(c==roman[i]){
+			return numbers[i];
+		}
+	}
+}
+    int romanToInt(string s) {
+        //Code here
+		int n = s.size(), index=0;
+		int ans=0;
+
+		while (index < n){
+			if(index!=n-1 && isNext(s[index],s[index+1])){
+				ans-=findValue(s[index]);
+			}
+			else{
+				ans+=findValue(s[index]);
+			}
+			index++;
+		}
+		return ans;
+    }
+};
