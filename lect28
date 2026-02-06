@@ -1,0 +1,92 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//Min Chars to Add for Palindrome
+int minChar(string &s) {
+    // Your code here
+	int n = s.size();
+	int start=0, end=1;
+	string temp = s;
+	reverse(temp.begin(),temp.end());
+
+	s+=temp;
+	vector<int>LPS(s.size(),0);
+
+	while(end<s.size()){
+		if(s[start]==s[end]){
+			LPS[end]=start+1;
+			start++ , end++;
+		}
+		else{
+			if(start==0){
+				end++;
+			}
+			else{
+				start=LPS[start-1];
+			}
+		}
+	}
+	if(n-LPS[s.size()-1]>=0){
+		return n-LPS[s.size()-1];
+	}
+	return 0;
+    
+}
+
+// Repeated String match 
+bool KMP(string &haystack, string &needle) {
+    int n = needle.size(), m=haystack.size();
+	vector<int>LPS(n,0);
+	int prefix=0, suffix=1;
+
+	while(suffix<n){
+		if(needle[prefix]==needle[suffix]){
+			LPS[suffix]=prefix+1;
+			prefix++, suffix++;
+		}
+		else{
+			if(prefix==0){
+				suffix++;
+			}
+			else{
+				prefix=LPS[prefix-1];
+			}
+		}
+	}
+	prefix=0, suffix=0;
+	while(prefix<n && suffix<m){
+		if(haystack[suffix]==needle[prefix]){
+			suffix++ , prefix++;
+		}
+		else{
+			if(prefix==0){
+				suffix++;
+			}
+			else{
+				prefix=LPS[prefix-1];
+			}
+		}
+	}
+	if(prefix==n){
+		return 1;
+	}
+	return 0;
+}
+int repeatedStringMatch(string &a, string &b) {
+    int repeat=1;
+	string newStr=a;
+
+	while(newStr.size()<b.size()){
+		newStr+=a;
+		repeat++;
+	}
+	if(KMP(newStr,b)){
+		return repeat;
+	}
+	newStr+=a;
+	repeat++;
+	if(KMP(newStr,b)){
+		return repeat;
+	}
+	return -1;
+}
