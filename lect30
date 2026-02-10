@@ -1,0 +1,37 @@
+// Deep Dive in Pointer
+#include<iostream>
+using namespace std;
+
+int main(){
+    // int n;
+    // cin >>n;
+    // // Why this is not allowed 
+    // int arr[n];
+    // arr[0]=1;
+
+    // for(int i=0; i<n; i++){
+    //     cout << arr[i];
+    // }
+
+    // int n,m;
+    // cin >> n >>m;
+    // int *p = new int[n];
+    // int *arr = new int[m];
+    // dangling pointer problem 
+
+
+    int *p = new int[10];
+    for(int i=0; i<10; i++){
+        cin >> p[i];
+    }
+    for(int i=0; i<10; i++){
+        cout << p[i];
+    }
+    //free the memory
+    delete[] p;
+
+    int **arr = new int *[5];
+    for(int i=0; i<5;i++){
+        arr[i]=new int[5];
+    }
+}
