@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+
+// Reccursion
+ void birthDay(int i){
+        if(i==0){
+            cout << "Happy Birthday";
+            return;
+        }
+        cout << i << "days left for Birthday" << endl;;
+        birthDay(i-1);
+    }
+
+    void Print(int num){
+        if(num==0) return;
+        cout << num << endl;
+        Print(num-1);
+    }
+
+    void Number(int num , int n){
+        if(num==n+1) return;
+        cout << num <<" ";
+        Number(num+1, n);
+    }
+
+    int Sum(int num ){
+        if(num==0) return 0;
+
+        return num+Sum(num-1);
+    }
+
+int main(){
+    // // 3D Array
+    // int ***arr= new int**[5];
+    // for(int i=0; i<5; i++){
+    //     arr[i] = new int *[5];
+    // }
+    // for(int i=0; i<5; i++){
+    //     for(int j=0; j<5; j++){
+    //         arr[i][j]=new int[6];
+    //     }
+    // }
+    // for(int i=0; i<5; i++){
+    //     for(int j=0; j<5; j++){
+    //         for(int k=0; k<6; k++){
+    //             arr[i][j][k]=i+j+k;
+    //         }
+    //     }
+    // }
+    //  for(int i=0; i<5; i++){
+    //     for(int j=0; j<5; j++){
+    //         for(int k=0; k<6; k++){
+    //             cout << arr[i][j][k] <<" ";
+    //         }
+    //         cout <<endl;
+    //     }
+    //     cout << endl;
+    // }
+
+    // Recursion
+    //birthDay(30);
+
+    // Print(10);
+
+    // int n;
+    // cin >> n;
+    // Number(1,n);
+
+    int sum = Sum(20);
+    cout << sum;
+
+    return 0;
+}   
