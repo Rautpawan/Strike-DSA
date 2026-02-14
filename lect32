@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+
+// Recursion
+// How to Recursion work
+// how to return in recurssion
+// how stack store this 
+// how stack used in Recursion
+
+
+// 74. Fibonacci Number
+int fib(int n) {
+    // Your code here
+    if(n<=1){
+		return n;
+	}
+	int ans = fib(n-1)+fib(n-2);
+	return ans;
+}
+
+// 75. Climbing Stairs
+int climbStairs(int n) {
+    // Your code here
+	if(n<=2){
+		return n;
+	}
+	return climbStairs(n-1)+climbStairs(n-2);
+}
+
+// 77. Frog Jump Steps ( Count number of hops )
+int countHops(int n) {
+    // Your code here 
+	if(n<=2){
+		return n;
+	}
+	if(n==3){
+		return 4;
+	}
+
+	return countHops(n-1)+countHops(n-2)+countHops(n-3);  
+}
