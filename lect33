@@ -1,0 +1,83 @@
+#include<iostream>
+using namespace std;
+
+void print(int *arr, int n, int index){
+    if(index==n){
+        return;
+    }
+    // cout << arr[index] << endl;
+    print(arr, n, index+1);
+    // For Reverse 
+    cout << arr[index] << endl;
+}
+void reverse(int arr[], int index){
+    if(index==-1){
+        return;
+    }
+    reverse(arr,index-1);
+    cout << arr[index] << endl;
+    // reverse(arr, index-1);
+}
+int sum(int arr[],int index, int n){
+    if(index==n){
+        return 0;
+    }
+    int ans = arr[index]+sum(arr,index+1,n);
+    return ans;
+}
+int main(){
+
+    int arr[10]={2,3,4,5,6,7,8,9,0,1};
+    // print(arr,10,0);
+    // reverse(arr,10);
+    cout << sum(arr,0, 10);
+
+    return 0;
+}
+
+// Palindrome string 
+bool palli(string &s, int start, int end){
+	if(start>=end){
+		return true;
+	}
+	if(s[start]!=s[end]){
+		return false;
+	}
+	return palli(s, start+1, end-1);
+}
+
+bool isPalindrome(string& s) {
+    // Your code here
+	return palli(s,0,s.size()-1);
+}
+
+// Reverse a string 
+void reverse(string &s, int start, int end){
+	if(start>=end){
+		return;
+	}
+	swap(s[start], s[end]);
+	reverse(s, start+1, end-1);
+}
+
+string reverseString(string &s) {
+    // Your code here
+	reverse(s,0, s.size()-1);
+	return s;
+} 
+
+// Liner Search
+int find(vector<int>&arr, int target, int index, int n){
+	if(index==n){
+		return -1;
+	}
+	if(arr[index]==target){
+		return index;
+	}
+	return find(arr, target, index+1, n);
+}
+
+int linearSearch(vector<int>& arr, int target) {
+    //code here
+	return find(arr, target, 0, arr.size());
+}
