@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Subset Sums
+void findSubsetSum(vector<int>& arr, int index, int n, int sum, vector<int>&ans){
+	if(index==n){
+		ans.push_back(sum);
+		return;
+	}
+	findSubsetSum(arr,index+1,n,sum+arr[index],ans);
+	findSubsetSum(arr,index+1,n,sum,ans);
+}
+
+vector<int> subsetSums(vector<int>& arr) {
+    // Your code here
+	vector<int>ans;
+	findSubsetSum(arr,0,arr.size(),0,ans);
+
+	return ans;
+}
+
+
+// Perfect Sum Problem
+void findSumSubset(vector<int>&arr, int index, int n, int sum, int &count, int target){
+	if(target==sum){
+		count++;
+		return;
+	}
+	if(sum>target || index==n){
+		return;
+	}
+	findSumSubset(arr,index+1,n,sum+arr[index],count,target);
+	findSumSubset(arr,index+1,n,sum,count,target);
+}
+
+    int countSubsetsWithSum(vector<int>& arr, int target) {
+        // Your code here
+		int count=0;
+
+		findSumSubset(arr,0,arr.size(),0,count,target);
+
+		return count;
+    }
+
+// Coin Change (count ways)
+void changeCoin(vector<int>&coins, int index, int n,int sum, int target, int&count){
+	if(sum==target){
+		count++;
+		return;
+	}
+	if(sum>target || index==n){
+		return;
+	}
+	changeCoin(coins,index,n,sum+coins[index],target,count);
+	changeCoin(coins,index+1,n,sum,target,count);
+}
+
+int countCoinCombinations(vector<int>& coins, int target) {
+    int count=0;
+
+	changeCoin(coins,0,coins.size(),0,target,count);
+
+	return count;
+}    
+
