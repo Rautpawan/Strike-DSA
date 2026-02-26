@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// 84. Subsets
+void findSubset(vector<int>&nums,int index, int n, vector<int>&temp, vector<vector<int>>&ans){
+	if(index==n){
+		ans.push_back(temp);
+		return;
+	}
+	findSubset(nums,index+1,n,temp,ans);
+	temp.push_back(nums[index]);
+	findSubset(nums,index+1,n,temp,ans);
+	temp.pop_back();
+
+}
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        // Your code here
+		vector<vector<int>>ans;
+		vector<int>temp;
+		findSubset(nums,0,nums.size(),temp,ans);
+		return ans;
+    }
+
+// 93. Ways to Sum to N
+void findTotal(int arr[],int n, int sum, int target, long long &count){
+	if(sum==target){
+		count++;
+		return;
+	}
+	if(sum>target){
+		return;
+	}
+
+
+	for(int i=0; i<n; i++){
+		if(arr[i]>0)
+		findTotal(arr,n,sum+arr[i],target,count);
+	}
+}
+
+long long countWays(int arr[], int n, int target) {
+        // Code here
+		long long count=0;
+		findTotal(arr,n,0,target,count);
+		return count;
+
+    }
+
+
+// 90. Permutations
+void permutation(vector<int>&nums, int index, int n, vector<vector<int>>&ans){
+	if(index==n-1){
+		ans.push_back(nums);
+		return;
+	}
+	for(int i=index; i<n; i++){
+		swap(nums[i],nums[index]);
+		permutation(nums,index+1,n,ans);
+		swap(nums[i],nums[index]);
+	}
+}
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        // Code here
+		vector<vector<int>>ans;
+		permutation(nums,0,nums.size(),ans);
+		return ans;
+    }	
+
