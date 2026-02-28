@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Permutations II
+void permutation(vector<int>&nums, int index, int n, vector<vector<int>>&ans){
+	if(index==n-1){
+		ans.push_back(nums);
+		return;
+	}
+
+	vector<bool>used(21,0);
+	for(int i=index; i<n; i++){
+		if(!used[nums[i]+10]){
+			used[nums[i]+10]=1;
+			swap(nums[i],nums[index]);
+			permutation(nums,index+1,n,ans);
+			swap(nums[i],nums[index]);
+		}
+	}
+}
+
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        // Code here 
+		vector<vector<int>>ans;
+		permutation(nums,0,nums.size(),ans);
+		return ans;
+    }
+
+
+// Combination Sum II
+void combination(vector<int>&candidates, int index, int n, vector<int>&path, vector<vector<int>>&ans, int target){
+	if(target==0){
+		ans.push_back(path);
+		return;
+	}
+	if(target<0 || index==n){
+		return;
+	}
+
+	vector<bool>used(51,0);
+	for(int i=index; i<n; i++){
+		if(!used[candidates[i]]){
+			used[candidates[i]]=1;
+			path.push_back(candidates[i]);
+			combination(candidates,i+1,n,path,ans,target-candidates[i]);
+			path.pop_back();
+		}
+	}
+}
+
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+    vector<vector<int>>ans;
+	vector<int>path;
+	sort(candidates.begin(),candidates.end());
+	combination(candidates,0,candidates.size(),path,ans,target);
+	return ans;
+}
+
+
+// Generate Parentheses
+void parenth(int open, int close, string &temp, vector<string>&ans){
+	if(open>close || open<0){
+		return;
+	}
+	if(open==0 && close==0){
+		ans.push_back(temp);
+		return;
+	}
+
+	temp.push_back('(');
+	parenth(open-1,close,temp,ans);
+	temp.pop_back();
+	temp.push_back(')');
+	parenth(open,close-1,temp,ans);
+	temp.pop_back();
+}
+
+vector<string> generateParenthesis(int n) {
+    vector<string>ans;
+	string temp;
+	parenth(n,n,temp,ans);
+	return ans;
+}
+
+
+// Tower of Hanoi
+ int towerOfHanoi(int n, int from, int to, int aux) {
+        // code here
+		if(n==1){
+			return 1;
+		}
+		return towerOfHanoi(n-1,from,to,aux)+1+ towerOfHanoi(n-1,aux,from,to);
+    }
