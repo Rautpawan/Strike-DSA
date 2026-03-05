@@ -1,0 +1,181 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// // 319. Find the Winner of the Circular Game
+// int winner(int n, int k){
+// 	if(n==1){
+// 		return 0;
+// 	}
+
+// 	return (winner(n-1,k)+k)%n;
+// }
+
+//     int findTheWinner(int n, int k) {
+        
+// 		return 1+winner(n,k);
+//     }
+
+
+// Introduction of OOPs
+// studied Class as a datastructure
+
+// class Student{
+//     public:
+//     string name;
+//     int age;
+//     int roll_no;
+
+//     // constructor
+//     Student(string n1, int age1, int roll1){
+//         name = n1;
+//         age=age1;
+//         roll_no=roll1;
+//     }
+// };
+
+
+// int main(){
+//     // Student S1, S2, S3;
+//     // S1.name = "Rahoit";
+//     // S1.age = 20;
+//     // S1.roll_no = 150;
+//     // cout << S1.name <<" " << S1.age <<" " << S1.roll_no << endl;
+
+//     // S2.name = "Mohan";
+//     // S3=S2;
+//     // cout << S3.name << endl;
+
+//     Student S1("Rohit",10,230);
+    
+
+//     return 0;
+// }
+
+// class Customer{
+//     public:
+//     int age;
+//     int balance;
+//     string name;
+// };
+
+// int main(){
+//     Customer *C1 = new Customer();
+//     // (*C1).name = "Rohit";
+//     // (*C1).age = 30;
+//     // (*C1).balance = 1200;
+//     C1->name = "Rohit";
+//     C1->age = 29;
+//     C1->balance = 9211;
+    
+//     // cout << (*C1).name <<" " << endl;
+//     cout << C1->name << endl;
+
+//     return 0;
+// }
+
+
+
+// Day 64
+// Linked List 
+
+class Node{
+    public:
+    int data;
+    Node *next;
+    // constructor
+    Node(int val){
+        data=val;
+        next=NULL;
+    }
+};
+int main(){
+
+    // Node n1(10,NULL);
+    // // n1.data = 10;
+    // // n1.next = NULL;
+    // cout <<n1.data <<" ";
+
+    // Node *head = new Node(10,NULL);
+    // cout << head->data <<" ";
+
+    int arr[5] = {1,2,3,4,5};
+//     Node *Head = NULL , *Tail = NULL;
+    
+//     for(int i=0; i<5; i++){
+//     if(!Head){
+//         // First node creation
+//         Head = new Node(arr[0]);
+//         Tail = Head;
+//     }
+//     else{
+//         // other node creation by adding element
+//         Tail->next = new Node(arr[i]);
+//         Tail = Tail->next;
+//     }
+// }
+// // Traverse the linked list
+// Tail = Head;
+// while(Tail!=NULL){
+//     cout << Tail->data << " ";
+//     Tail=Tail->next;
+// }
+
+    // reverse the linked list
+    Node *Head = NULL;
+    for(int i=0; i<5; i++){
+        if(!Head){
+            Head = new Node(arr[i]);
+        }
+        else{
+            Node *temp = new Node(arr[i]);
+            temp->next = Head;
+            Head=temp;
+        }
+    }
+    Node *temp = Head;
+    while(temp){
+        cout << temp->data << " ";
+        temp= temp->next;
+    }
+
+    // Insert a node after the particular node
+    // Insert 100 after 3
+    temp = Head;
+    while(temp->data!=3){
+        temp=temp->next;
+    }
+    Node *newNode = new Node(100);
+    newNode->next = temp->next;
+    temp->next = newNode;
+
+    cout << endl;
+    temp = Head;
+    while(temp){
+        cout << temp->data << " ";
+        temp= temp->next;
+    }
+
+    // Insert the node before the a element
+    if(Head->data==5){
+        Node *temp = new Node(300);
+        temp->next = Head;
+        Head = temp;
+    }
+    Node *prev = NULL , *curr = Head;
+    while(curr->data!=5){
+        prev=curr;
+        curr= curr->next;
+    }
+    temp = new Node(200);
+    temp->next= curr;
+    prev->next = temp;
+
+    cout << endl;
+    temp = Head;
+    while(temp){
+        cout << temp->data << " ";
+        temp= temp->next;
+    }
+
+    return 0;
+}
