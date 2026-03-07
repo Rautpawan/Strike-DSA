@@ -1,0 +1,140 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node *next;
+
+    Node(int value){
+        data = value;
+        next= NULL;
+    }
+};
+
+int main(){
+    int arr[5] = {10,12,15,20,11};
+    Node *head = NULL;
+
+    for(int i=0; i<5; i++){
+        if(!head){
+            head = new Node(arr[i]);
+        }
+        else{
+            Node *temp = new Node(arr[i]);
+            temp->next = head;
+            head = temp;
+        }
+    }
+    // How delete a node
+
+    // First Node deletion
+    Node *temp = head;
+
+    head = head->next;
+    delete temp;
+
+    // Last node deletion
+    temp = head;
+    Node *prev = NULL;
+    while(temp->next){
+        prev= temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    delete temp;
+
+    // How to delete 4th node
+    temp = head;
+    int n =3;
+    while(--n){
+        temp = temp->next;
+    }
+    prev = temp->next;
+    temp->next = prev->next;
+    delete prev;
+
+    return 0;
+}
+
+// Delete Node in a Linked List
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+void deleteNode(ListNode* node) {
+    ListNode *temp = node->next;
+	node->val = temp->val;
+	node->next = temp->next;
+	delete temp;
+	
+}
+
+// Middle of the Linked List
+// Definition for singly-linked list.
+// struct ListNode {
+//     int val;
+//     ListNode *next;
+//     ListNode() : val(0), next(nullptr) {}
+//     ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// };
+
+ListNode* middleNode(ListNode* head) {
+    ListNode* slow = head , *fast = head;
+
+	while(fast && fast->next){
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+	return slow;
+}  
+
+// Reverse Linked List
+// struct ListNode {
+//     int val;
+//     ListNode *next;
+//     ListNode() : val(0), next(nullptr) {}
+//     ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// };
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = NULL, *curr = head, *future = NULL;
+
+	while(curr){
+		future = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = future;
+	}
+	head = prev;
+	return head;
+}
+
+//  Remove Nodes From Linked List
+// Definition for singly-linked list.
+// struct ListNode {
+//     int val;
+//     ListNode *next;
+//     ListNode() : val(0), next(nullptr) {}
+//     ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// };
+
+ListNode* removeNodes(ListNode* head) {
+    if(!head || !head->next){
+		return head;
+	}
+	head->next = removeNodes(head->next);
+
+	if(head->val < head->next->val){
+		ListNode* temp = head->next;
+		delete head;
+		return temp;
+	}
+	return head;
+}
