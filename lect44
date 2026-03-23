@@ -1,0 +1,194 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Stack
+// Operations : push, pop, top, empty, size
+
+
+// Stack using Array
+class Stack{
+    public:
+    int arr[100];
+    int index;
+
+    Stack(){
+        index = -1;
+    }
+
+    void push(int val){
+        if(index==99){
+            cout << "Stack Overflow\n";
+        }
+        else{
+            index++;
+            arr[index]=val;
+            cout << val <<"pushed into stack \n";
+        }
+    }
+
+    void pop(){
+        if(index==-1){
+            cout <<"stack is uderflow\n";
+        }
+        else{
+            cout << arr[index] << "popped from stack \n";
+            index--;
+        }
+    }
+
+    int top(){
+        return arr[index];
+    }
+
+    bool empty(){
+        return index==-1;
+    }
+
+    int size(){
+        return index+1;
+    }
+};
+
+int main(){
+    Stack s;
+    // if(s.index==99){
+    //     cout << "Stack is Overflow";
+    // }
+    // else{
+    //     s.index++;
+    //     s.arr[s.index] = 10;
+    //     cout << "10 pushed into stack \n";
+    // }
+    s.push(20);
+    s.push(10);
+
+    cout << s.size() << endl;
+    cout << s.top();
+}
+
+
+// Stack using Linked List
+class Node{
+    public:
+    int data;
+    Node *next;
+
+    Node(int val){
+        data = val;
+        next = NULL;
+    }
+};
+class Stack{
+    public:
+    Node *index;
+    int size;
+
+    Stack(){
+        index = NULL;
+        size=0;
+    }
+
+    void push(int val){
+        Node *temp = new Node(val);
+        if(!temp){
+            cout <<"Stack overflow";
+            return;
+        }
+        temp->next = index;
+        index=temp;
+        size++;
+        cout << val << "Pushed into stack \n";
+    }
+
+    void pop(){
+        if(index==NULL){
+            cout <<"Stack is Underflow";
+        }
+        else{
+            cout << index->data <<"popped from the stack \n";
+            Node *temp = index;
+            index = index->next;
+            delete temp;
+            size--;
+        }
+    }
+
+    int top(){
+        return index->data;
+    }
+    int size(){
+        return size;
+    }
+    bool empty(){
+        return size==0;
+    }
+};
+
+int main(){
+    Stack s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.size();
+}
+
+
+
+//101. Implement Stack Using Array
+class MyStack {
+public:
+int arr[100];
+int index;
+    MyStack() {
+        index = -1;
+    }
+    
+    void push(int x) {
+        if(index==99){
+			return;
+		}
+		else{
+			arr[++index]=x;
+		}
+    }
+    
+    int pop() {
+		if(index==-1){
+			return -1;
+		}
+       int val = arr[index--];
+	   return val; 
+    }
+};
+
+
+// Reverse the Array
+void reverseArray(vector<int>& arr) {
+    int n = arr.size();
+	stack<int>s;
+
+	for(int i=0; i<n; i++){
+		s.push(arr[i]);
+	}
+
+	for(int i=0; i<n; i++){
+		arr[i]=s.top();
+		s.pop();
+	}
+}
+
+
+// Insert an Element at the Bottom of a Stack
+void insertAtBottom(stack<int>& st, int x) {
+    stack<int>extra;
+	while(!st.empty()){
+		extra.push(st.top());
+		st.pop();
+	}
+	st.push(x);
+	while(!extra.empty()){
+		st.push(extra.top());
+		extra.pop();
+	}
+}
+
