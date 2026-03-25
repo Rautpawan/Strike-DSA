@@ -1,0 +1,117 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// In strike course
+// 109. Next Greater Element II
+vector<int> nextLargerElement(vector<int>& arr) {
+    stack<int>st;
+    vector<int>ans(arr.size(),-1);
+
+    for(int i=0; i<arr.size(); i++){
+        while(!st.empty() && arr[i]>arr[st.top()]){
+            ans[st.top()]=arr[i];
+            st.pop();
+        }
+        st.push(i);
+    }
+    return ans;
+}
+
+
+// 418. Next Smaller Element
+class Solution {
+public:
+    vector<int> nextSmallerElement(vector<int> &arr, int n) {
+        // Your code here
+        stack<int>st;
+    vector<int>ans(arr.size(),-1);
+
+    for(int i=0; i<arr.size(); i++){
+        while(!st.empty() && arr[i]<arr[st.top()]){
+            ans[st.top()]=arr[i];
+            st.pop();
+        }
+        st.push(i);
+    }
+    return ans;
+    }
+};
+
+
+// 419. Previous Greater Element
+class Solution {
+public:
+    vector<int> previousGreaterElement(vector<int>& arr) {
+        // Your code here
+        stack<int>st;
+    vector<int>ans(arr.size(),-1);
+
+    for(int i=arr.size()-1; i>=0; i--){
+        while(!st.empty() && arr[i]>arr[st.top()]){
+            ans[st.top()]=arr[i];
+            st.pop();
+        }
+        st.push(i);
+    }
+    return ans;
+    }
+};
+
+
+// 341. Stock Span Problem
+vector<int> calculateSpan(vector<int>& arr) {
+    int n = arr.size();
+    vector<int> span(n);
+    stack<int> st; 
+    
+    for(int i = 0; i < n; i++) {
+        while(!st.empty() && arr[st.top()] <= arr[i]) {
+            st.pop();
+        }
+
+        if(st.empty()) {
+            span[i] = i + 1;
+        } else {
+            span[i] = i - st.top();
+        }
+
+        st.push(i);
+    }
+    
+    return span;
+}
+
+
+// 203. Largest Rectangle in Histogram
+int largestRectangleArea(vector<int>& heights) {
+    stack<int>st;
+    int n = heights.size();
+
+    vector<int>NSR(n,-1);
+    vector<int>NSL(n,-1);
+
+    for(int i=0; i<n; i++){
+        while(!st.empty() && heights[i]<heights[st.top()]){
+            NSR[st.top()] = i;
+            st.pop();
+        }
+        st.push(i);
+    }
+    while(!st.empty()){
+        NSR[st.top()]=n;
+        st.pop();
+    }
+
+    for(int i=n-1; i>=0; i--){
+        while(!st.empty() && heights[i]<heights[st.top()]){
+            NSL[st.top()] = i;
+            st.pop();
+        }
+        st.push(i);
+    }
+    int maxArea = 0;
+    for(int i=0; i<n; i++){
+        maxArea = max(maxArea,(NSR[i]-NSL[i]-1)*heights[i]);
+    }
+    return maxArea;
+}
