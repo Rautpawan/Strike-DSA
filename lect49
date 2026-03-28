@@ -1,0 +1,151 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Day 87
+
+// 347. First non-repeating character in a stream
+string firstNonRepeating(string A) {
+    vector<int>freq(26,0);
+    string result;
+    queue<char>q;
+
+    for(int i=0; i<A.size(); i++){
+        freq[A[i]-'a']++;
+
+        if(freq[A[i]-'a']==1){
+            q.push(A[i]);
+        }
+
+        while(!q.empty() && freq[q.front()-'a']>1){
+            q.pop();
+        }
+        if(!q.empty()){
+            result.push_back(q.front());
+        }
+        else{
+            result.push_back('#');
+        }
+    }
+    return result;
+}
+
+
+// Deque
+
+class Node{
+    public:
+    int data;
+    Node *prev , *next;
+
+    Node(int value){
+        data = value;
+        prev = next = NULL;
+    }
+};
+class Deque{
+    public:
+    Node *front, *rear;
+    int size;
+
+    Deque(){
+        front = rear = NULL;
+        size=0;
+    }
+
+    bool isEmpty(){
+        return size==0;
+    }
+
+    void pushBack(int val){
+        if(isEmpty()){
+            front = rear = new Node(val);
+            size++;
+        }
+        else{
+            rear->next = new Node(val);
+            rear->next->prev = rear;
+            rear = rear->next;
+            size++;
+        }
+    }
+
+    void pushFront(int val){
+        if(isEmpty()){
+            front = rear = new Node(val);
+            size++;
+        }
+        else{
+            // front->prev = new Node(val);
+            // front->prev->next = front;
+            // front = front->prev;
+            Node *first = new Node(val);
+            first->next = front;
+            front->prev = first;
+            front = first; 
+            size++;
+        }
+    }
+
+    void popBack(){
+        if(isEmpty()){
+            cout << "Deque is Empty\n";
+            return ;
+        }
+        else{
+            if(rear == front){
+                delete rear;
+                rear = front = NULL;
+                size--;
+            }
+            else{
+                rear = rear->prev;
+                delete rear->next;
+                rear->next = NULL;
+                size--;
+            }
+        }
+    }
+
+    void popFront(){
+        if(isEmpty()){
+            cout << "Deque is Empty\n";
+            return ;
+        }
+        else{
+            if(rear == front){
+                delete rear;
+                rear = front = NULL;
+                size--;
+            }
+            else{
+                front = front->next;
+                delete front->prev;
+                front->prev = NULL;
+                size--;
+            }
+        }
+    }
+
+    int getFront(){
+        if(isEmpty()){
+            return -1;
+        }
+        return front->data;
+    }
+
+    int getBack(){
+        if(isEmpty()){
+            return -1;
+        }
+        return rear->data;
+    }
+};
+
+int main(){
+    Deque d;
+    d.pushBack(20);
+    d.pushBack(30);
+    d.pushFront(50);
+    d.pushFront(90);
+
+}
