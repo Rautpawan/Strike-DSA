@@ -1,0 +1,125 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Day 88
+
+// 225. Sliding Window Maximum
+vector<int> maxSlidingWindow(vector<int>& arr, int k) {
+    int n = arr.size();
+    deque<int>dq;
+
+    for(int i=0; i<k-1; i++){
+        while(!dq.empty() && arr[dq.back()]<arr[i]){
+            dq.pop_back();
+        }
+        dq.push_back(i);
+    }
+    vector<int>ans;
+    for(int i=k-1; i<n; i++){
+        while(!dq.empty() && arr[dq.back()]<arr[i]){
+            dq.pop_back();
+        }
+        dq.push_back(i);
+
+        if(dq.front()<=i-k){
+            dq.pop_front();
+        }
+
+        ans.push_back(arr[dq.front()]);
+    }
+    return ans;
+}
+
+
+// 431. Get Min from Stack
+class SpecialStack {
+  public:
+  stack<int>st;
+  stack<int>minst;
+    void push(int x) {
+        // code here
+        st.push(x);
+        if(minst.empty()){
+            minst.push(x);
+        }
+        else{
+            minst.push(min(minst.top(),x));
+        }
+    }
+    void pop() {
+        // code here
+        if(st.empty()){
+            return;
+        }
+        st.pop();
+        minst.pop();
+    }
+    int peek() {
+        // code here
+        if(st.empty()){
+            return -1;
+        }
+        return st.top();
+    }
+    int getMin() {
+        // code here
+        if(st.empty()){
+            return -1;
+        }
+        return minst.top();
+    }
+    bool isEmpty() {
+        // code here
+        return st.empty();
+    }
+};
+
+// Better
+class SpecialStack {
+  public:
+  stack<long long>st;
+
+    void push(int x) {
+        // code here
+        if(st.empty()){
+            long long a=x;
+            st.push(a*1000000001+a);
+        }
+        else{
+            long long a = x;
+            long long minElement = st.top()%1000000001; 
+            minElement = min(a,minElement);
+            st.push(a*1000000001+minElement);
+        }
+    }
+    void pop() {
+        // code here
+        if(st.empty()){
+            return ;
+        }
+        st.pop();
+    }
+    int peek() {
+        // code here
+        if(st.empty()){
+            return -1;
+        }
+        long long element = st.top()/1000000001;
+        return element;
+    }
+    int getMin() {
+        // code here
+         if(st.empty()){
+            return -1;
+        }
+        long long element = st.top()%1000000001;
+        return element;
+    }
+    bool isEmpty() {
+        // code here
+        return st.empty();
+    }
+};
+
+
+// 205. Maximal Rectangle solved
