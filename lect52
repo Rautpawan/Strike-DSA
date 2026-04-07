@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+// Tree
+// Properties of Tree
+// If n- nodes then edges=n-1
+class Node{
+    public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val){
+        data = val;
+        left = right = NULL;
+    }
+};
+
+void preorder(Node *root){
+    if(!root){
+        return;
+    }
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void inorder(Node *root){
+    if(!root){
+        return;
+    }
+    inorder(root->left);
+    cout << root->data <<" ";
+    inorder(root->right);
+}
+
+void postorder(Node *root){
+    if(!root){
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data <<" ";
+}
+
+int main(){
+    int x, leftvalue, rightvalue;
+    cout << "Enter the root Node : ";
+    cin >>x;
+    Node *root = new Node(x);
+    cout << endl;
+    queue<Node*>q;
+    q.push(root);
+
+    while(!q.empty()){
+        Node* temp = q.front();
+        q.pop();
+
+        cout << "Enter the left value: ";
+        cin>>leftvalue;
+        cout << endl;
+        if(leftvalue!=-1){
+            temp->left = new Node(leftvalue);
+            q.push(temp->left);
+        }
+
+         cout << "Enter the right value: ";
+        cin>>rightvalue;
+        cout << endl;
+        if(rightvalue!=-1){
+            temp->right = new Node(rightvalue);
+            q.push(temp->right);
+        }
+
+    }
+    cout << "Preorder of the Tree: " << " ";
+    preorder(root);
+    cout << endl;
+
+    cout << "Inorder of the Tree: " << " ";
+    inorder(root);
+    cout << endl;
+    return 0;
+
+    cout << "postorder of the Tree: " << " ";
+    postorder(root);
+    cout << endl;
+}
+
+// Preorder traversal
+// Inorder traversal
+// Postorder traversal
